@@ -1,4 +1,6 @@
+import 'package:cars_sample/domain/login_service.dart';
 import 'package:flutter/material.dart';
+import 'package:cars_sample/utils/alerts.dart';
 
 class LoginPage extends StatelessWidget {
   final _loginController = TextEditingController(text: '');
@@ -84,26 +86,20 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _onPressedLogin(BuildContext context) {
+  _onPressedLogin(BuildContext context) async {
     final login = _loginController.text;
     final senha = _senhaController.text;
 
     if (!_formKey.currentState.validate()) {
-//      showDialog(
-//        context: context,
-//        builder: (context) {
-//          return AlertDialog(
-//            title: Text('Erro'),
-//            content: Text('Informe corretamente o login e senha'),
-//            actions: <Widget>[
-//              FlatButton(
-//                  onPressed: () => Navigator.pop(context), child: Text('OK')),
-//            ],
-//          );
-//        },
-//      );
-
       return;
+    }
+
+    final ok = await LoginService.login(login, senha);
+
+    if (ok) {
+      print('login ok');
+    } else {
+      alert(context, 'Erro', 'Erro de login');
     }
 
 /*
