@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  final _loginController = TextEditingController(text: 'tulio');
-  final _senhaController = TextEditingController(text: '123456');
+  final _loginController = TextEditingController(text: '');
+  final _senhaController = TextEditingController(text: '');
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -12,17 +14,39 @@ class LoginPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: _buildBody(),
+        child: _buildBody(context),
       ),
     );
   }
 
-  Widget _buildBody() {
+  String _validateLogin(String text) {
+    if (text.isEmpty) {
+      return 'Informe o login';
+    }
+
+    return null;
+  }
+
+  String _validateSenha(String text) {
+    if (text.isEmpty) {
+      return 'Informe a senha';
+    }
+
+    if (text.length <= 2) {
+      return 'Senha precisa ter mais de 2 números';
+    }
+
+    return null;
+  }
+
+  Widget _buildBody(BuildContext context) {
     return Form(
+      key: _formKey,
       child: ListView(
         children: <Widget>[
           TextFormField(
             controller: _loginController,
+            validator: _validateSenha,
             decoration: InputDecoration(
               labelText: 'Login',
               labelStyle: TextStyle(color: Colors.blue, fontSize: 25.0),
@@ -32,6 +56,7 @@ class LoginPage extends StatelessWidget {
           ),
           TextFormField(
             controller: _senhaController,
+            validator: _validateLogin,
             obscureText: true,
             decoration: InputDecoration(
               labelText: 'Senha',
@@ -49,7 +74,9 @@ class LoginPage extends StatelessWidget {
                 'Login',
                 style: TextStyle(fontSize: 25.0, color: Colors.white),
               ),
-              onPressed: _onPressedLogin,
+              onPressed: () {
+                _onPressedLogin(context);
+              },
             ),
           ),
         ],
@@ -57,10 +84,43 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _onPressedLogin() {
+  _onPressedLogin(BuildContext context) {
     final login = _loginController.text;
     final senha = _senhaController.text;
 
-    print('$login, $senha');
+    if (!_formKey.currentState.validate()) {
+//      showDialog(
+//        context: context,
+//        builder: (context) {
+//          return AlertDialog(
+//            title: Text('Erro'),
+//            content: Text('Informe corretamente o login e senha'),
+//            actions: <Widget>[
+//              FlatButton(
+//                  onPressed: () => Navigator.pop(context), child: Text('OK')),
+//            ],
+//          );
+//        },
+//      );
+
+      return;
+    }
+
+/*
+    if (login.isEmpty || senha.isEmpty) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Erro'),
+              content: Text('Informe corretamente o login e senha'),
+              actions: <Widget>[
+                FlatButton(
+                    onPressed: () => Navigator.pop(context), child: Text('OK')),
+              ],
+            );
+          });
+    }
+*/
   }
 }
