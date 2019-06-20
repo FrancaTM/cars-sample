@@ -1,15 +1,22 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
+import 'package:cars_sample/domain/response.dart';
+
 class LoginService {
-  static Future<bool> login(String login, String senha) async {
+  static Future<Response> login(String login, String senha) async {
     var url = 'http://livrowebservices.com.br/rest/login';
 
     final response =
         await http.post(url, body: {'login': login, 'senha': senha});
-    final body = response.body;
+    final s = response.body;
+    print(s);
 
-    print(body);
+    final Map<String, dynamic> map = json.decode(s);
 
-    return true;
+    final r = Response.fromJson(map);
+
+    return r;
   }
 }
