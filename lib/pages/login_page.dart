@@ -1,4 +1,6 @@
 import 'package:cars_sample/domain/login_service.dart';
+import 'package:cars_sample/pages/home_page.dart';
+import 'package:cars_sample/utils/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:cars_sample/utils/alerts.dart';
 
@@ -114,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if (response.isOk()) {
       print('login ok');
+      pushReplacement(context, HomePage());
     } else {
       alert(context, 'Erro', response.message);
     }
