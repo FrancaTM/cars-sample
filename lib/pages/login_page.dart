@@ -1,4 +1,4 @@
-import 'package:cars_sample/domain/login_service.dart';
+import 'package:cars_sample/domain/services/login_service.dart';
 import 'package:cars_sample/pages/home_page.dart';
 import 'package:cars_sample/utils/nav.dart';
 import 'package:flutter/material.dart';
