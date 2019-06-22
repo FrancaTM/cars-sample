@@ -24,35 +24,26 @@ class HomePage extends StatelessWidget {
         final c = carros[index];
 
         return Container(
-          height: 150,
+          height: 250,
           child: Card(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                ListTile(
-                  title: Text(c.nome),
-                  subtitle: Text('desc'),
-                  leading: Image.network(
-                    c.urlFoto,
-                    width: 120,
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    child: Image.network(c.urlFoto),
                   ),
                 ),
-                ButtonTheme.bar(
-                  child: ButtonBar(
-                    children: <Widget>[
-                      FlatButton(
-                        child: const Text('BUY TICKETS'),
-                        onPressed: () {
-                          /* ... */
-                        },
+                Expanded(
+                  child: Container(
+                    color: Colors.grey,
+                    child: Center(
+                      child: Text(
+                        c.nome,
+                        style: TextStyle(color: Colors.white, fontSize: 24.0),
                       ),
-                      FlatButton(
-                        child: const Text('LISTEN'),
-                        onPressed: () {
-                          /* ... */
-                        },
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ],
