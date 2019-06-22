@@ -2,7 +2,7 @@ import 'package:cars_sample/domain/carro.dart';
 
 class CarroService {
   static List<Carro> getCarros() {
-    final carros = List.generate(50, (index) {
+    final carros = List.generate(22, (index) {
       return Carro(
           nome: 'Ferrari $index',
           urlFoto:
