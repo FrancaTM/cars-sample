@@ -24,27 +24,23 @@ class HomePage extends StatelessWidget {
         final c = carros[index];
 
         return Container(
-          height: 250,
           child: Card(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    child: Image.network(c.urlFoto),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    color: Colors.grey,
-                    child: Center(
-                      child: Text(
-                        c.nome,
-                        style: TextStyle(color: Colors.white, fontSize: 24.0),
+                Stack(
+                  children: <Widget>[
+                    Image.network(c.urlFoto),
+                    Container(
+                      color: Colors.black45,
+                      child: Center(
+                        child: Text(
+                          c.nome,
+                          style: TextStyle(color: Colors.white, fontSize: 24.0),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
