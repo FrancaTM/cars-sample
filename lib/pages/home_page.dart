@@ -25,24 +25,22 @@ class HomePage extends StatelessWidget {
 
         return Container(
           child: Card(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Image.network(c.urlFoto),
-                    Container(
-                      color: Colors.black45,
-                      child: Center(
-                        child: Text(
-                          c.nome,
-                          style: TextStyle(color: Colors.white, fontSize: 24.0),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Center(child: Image.network(c.urlFoto)),
+                  Text(
+                    c.nome,
+                    style: TextStyle(color: Colors.black, fontSize: 24.0),
+                  ),
+                  Text(
+                    'Descrição',
+                    style: TextStyle(color: Colors.black, fontSize: 16.0),
+                  ),
+                ],
+              ),
             ),
           ),
         );
