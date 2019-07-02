@@ -3,14 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:cars_sample/domain/carro.dart';
 import 'package:cars_sample/domain/services/carro_service.dart';
 
-class CarrosListView extends StatelessWidget {
+class CarrosListView extends StatefulWidget {
   final String tipo;
 
   const CarrosListView({this.tipo});
 
   @override
+  _CarrosListViewState createState() => _CarrosListViewState();
+}
+
+class _CarrosListViewState extends State<CarrosListView>
+    with AutomaticKeepAliveClientMixin<CarrosListView> {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
-    return _buildBody(tipo);
+    return _buildBody(widget.tipo);
   }
 
   _buildBody(String tipo) {
