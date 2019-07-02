@@ -6,16 +6,28 @@ import 'package:cars_sample/domain/services/carro_service.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Home'),
+          bottom: TabBar(tabs: [
+            Tab(text: 'Clássicos', icon: Icon(Icons.directions_car)),
+            Tab(text: 'Esportivos', icon: Icon(Icons.directions_car)),
+            Tab(text: 'Luxo', icon: Icon(Icons.directions_car)),
+          ]),
+        ),
+        body: TabBarView(children: [
+          _buildBody(TipoCarro.classicos),
+          _buildBody(TipoCarro.esportivos),
+          _buildBody(TipoCarro.luxo),
+        ]),
       ),
-      body: _buildBody(),
     );
   }
 
-  _buildBody() {
-    Future future = CarroService.getCarros();
+  _buildBody(String tipo) {
+    Future future = CarroService.getCarros(tipo);
 
     return Container(
       padding: EdgeInsets.all(16.0),

@@ -6,9 +6,9 @@ import 'package:http/http.dart' as http;
 import 'package:cars_sample/domain/carro.dart';
 
 class CarroService {
-  static Future<List<Carro>> getCarros() async {
-    final url = 'http://livrowebservices.com.br/rest/carros';
-//    print('> get: $url');
+  static Future<List<Carro>> getCarros(String tipo) async {
+    final url = 'http://livrowebservices.com.br/rest/carros/tipo/$tipo';
+    print('> get: $url');
 
     final response = await http.get(url);
 //    print('< : ${response.body}');
