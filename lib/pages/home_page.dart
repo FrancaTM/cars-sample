@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:cars_sample/utils/prefs.dart';
 import 'package:cars_sample/domain/carro.dart';
 import 'package:cars_sample/widgets/carros_list_view.dart';
 
@@ -20,17 +19,14 @@ class _HomePageState extends State<HomePage>
 
     tabController = TabController(length: 3, vsync: this);
 
-    Future<SharedPreferences> future = SharedPreferences.getInstance();
-    future.then((prefs) {
-      int index = prefs.getInt('tabIndex') ?? 0;
+    Prefs.getInt('tabIndex').then((index) {
       tabController.index = index;
     });
 
     tabController.addListener(() async {
       int index = tabController.index;
 
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setInt('tabIndex', index);
+      Prefs.setInt('tabIndex', index);
       print('tab $index');
     });
   }
