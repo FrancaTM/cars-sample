@@ -40,8 +40,49 @@ class _CarroPageState extends State<CarroPage> {
 
   _buildBody() {
     return ListView(
+      padding: EdgeInsets.all(16.0),
       children: <Widget>[
         Image.network(carro.urlFoto),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    carro.nome,
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    carro.tipo,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.grey[500],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Icon(
+                Icons.favorite,
+                color: Colors.red,
+                size: 36.0,
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Icon(
+                Icons.share,
+                size: 36.0,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
