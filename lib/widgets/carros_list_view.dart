@@ -1,57 +1,16 @@
-import 'package:cars_sample/pages/carro_page.dart';
 import 'package:flutter/material.dart';
 
+import 'package:cars_sample/pages/carro_page.dart';
 import 'package:cars_sample/domain/carro.dart';
-import 'package:cars_sample/domain/services/carro_service.dart';
 import 'package:cars_sample/utils/nav.dart';
 
-class CarrosListView extends StatefulWidget {
-  final String tipo;
+class CarrosListView extends StatelessWidget {
+  final List<Carro> carros;
 
-  const CarrosListView({this.tipo});
-
-  @override
-  _CarrosListViewState createState() => _CarrosListViewState();
-}
-
-class _CarrosListViewState extends State<CarrosListView>
-    with AutomaticKeepAliveClientMixin<CarrosListView> {
-  @override
-  bool get wantKeepAlive => true;
+  const CarrosListView({this.carros});
 
   @override
   Widget build(BuildContext context) {
-    return _buildBody(widget.tipo);
-  }
-
-  _buildBody(String tipo) {
-    Future future = CarroService.getCarros(tipo);
-
-    return Container(
-      padding: EdgeInsets.all(16.0),
-      child: FutureBuilder<List<Carro>>(
-        future: future,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return _buildListView(snapshot.data);
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                'Dados inexistentes',
-                style: TextStyle(fontSize: 26.0, color: Colors.grey),
-              ),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
-    );
-  }
-
-  _buildListView(List<Carro> carros) {
     return ListView.builder(
       itemCount: carros.length,
       itemBuilder: (context, index) {

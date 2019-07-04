@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:cars_sample/utils/prefs.dart';
 import 'package:cars_sample/domain/carro.dart';
-import 'package:cars_sample/widgets/carros_list_view.dart';
+import 'package:cars_sample/widgets/carros_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
 
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 4, vsync: this);
 
     Prefs.getInt('tabIndex').then((index) {
       tabController.index = index;
@@ -42,15 +42,17 @@ class _HomePageState extends State<HomePage>
             Tab(text: 'Clássicos', icon: Icon(Icons.directions_car)),
             Tab(text: 'Esportivos', icon: Icon(Icons.directions_car)),
             Tab(text: 'Luxo', icon: Icon(Icons.directions_car)),
+            Tab(text: 'Favoritos', icon: Icon(Icons.favorite)),
           ],
         ),
       ),
       body: TabBarView(
         controller: tabController,
         children: [
-          CarrosListView(tipo: TipoCarro.classicos),
-          CarrosListView(tipo: TipoCarro.esportivos),
-          CarrosListView(tipo: TipoCarro.luxo),
+          CarrosPage(tipo: TipoCarro.classicos),
+          CarrosPage(tipo: TipoCarro.esportivos),
+          CarrosPage(tipo: TipoCarro.luxo),
+          CarrosPage(tipo: TipoCarro.classicos),
         ],
       ),
     );
