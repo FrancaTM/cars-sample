@@ -1,3 +1,4 @@
+import 'package:cars_sample/domain/db/CarroDB.dart';
 import 'package:cars_sample/domain/services/carro_service.dart';
 import 'package:flutter/material.dart';
 
@@ -75,7 +76,9 @@ class _CarroPageState extends State<CarroPage> {
           ),
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            _onTapFavorito(context, carro);
+          },
           child: Icon(
             Icons.favorite,
             color: Colors.red,
@@ -117,5 +120,11 @@ class _CarroPageState extends State<CarroPage> {
         ],
       ),
     );
+  }
+
+  Future _onTapFavorito(BuildContext context, Carro carro) async {
+    final db = CarroDB.getInstance();
+    int id = await db.saveCarro(carro);
+    print('carro salvo: $id');
   }
 }
