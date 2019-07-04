@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:cars_sample/widgets/favoritos_page.dart';
 import 'package:cars_sample/utils/prefs.dart';
 import 'package:cars_sample/domain/carro.dart';
 import 'package:cars_sample/widgets/carros_page.dart';
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage>
           CarrosPage(tipo: TipoCarro.classicos),
           CarrosPage(tipo: TipoCarro.esportivos),
           CarrosPage(tipo: TipoCarro.luxo),
-          CarrosPage(tipo: TipoCarro.classicos),
+          FavoritosPage(),
         ],
       ),
     );
