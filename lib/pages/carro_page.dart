@@ -19,6 +19,20 @@ class _CarroPageState extends State<CarroPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(carro.nome),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.place), onPressed: () {}),
+          IconButton(icon: Icon(Icons.videocam), onPressed: () {}),
+          PopupMenuButton<String>(
+            onSelected: (string) {},
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(child: Text('Editar')),
+                PopupMenuItem(child: Text('Deletar')),
+                PopupMenuItem(child: Text('Share')),
+              ];
+            },
+          ),
+        ],
       ),
       body: _buildBody(),
     );
