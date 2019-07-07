@@ -1,8 +1,10 @@
-import 'package:cars_sample/domain/db/CarroDB.dart';
-import 'package:cars_sample/domain/services/carro_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cars_sample/domain/carro.dart';
+import 'package:cars_sample/domain/db/CarroDB.dart';
+import 'package:cars_sample/domain/services/carro_service.dart';
+import 'package:cars_sample/utils/nav.dart';
+import 'package:cars_sample/pages/carro_form_page.dart';
 
 class CarroPage extends StatefulWidget {
   final Carro carro;
@@ -37,12 +39,14 @@ class _CarroPageState extends State<CarroPage> {
           IconButton(icon: Icon(Icons.place), onPressed: () {}),
           IconButton(icon: Icon(Icons.videocam), onPressed: () {}),
           PopupMenuButton<String>(
-            onSelected: (string) {},
+            onSelected: (value) {
+              _onSelectedPopupMenuItem(value);
+            },
             itemBuilder: (BuildContext context) {
               return [
-                PopupMenuItem(child: Text('Editar')),
-                PopupMenuItem(child: Text('Deletar')),
-                PopupMenuItem(child: Text('Share')),
+                PopupMenuItem(child: Text('Editar'), value: 'Editar'),
+                PopupMenuItem(child: Text('Deletar'), value: 'Deletar'),
+                PopupMenuItem(child: Text('Share'), value: 'Share'),
               ];
             },
           ),
@@ -148,5 +152,12 @@ class _CarroPageState extends State<CarroPage> {
     setState(() {
       _isFavorito = !exists;
     });
+  }
+
+  void _onSelectedPopupMenuItem(String value) {
+    print('_onSelectedPopupMenuItem > $value');
+    if (value == 'Editar') {
+      push(context, CarroFormPage(carro: carro));
+    }
   }
 }

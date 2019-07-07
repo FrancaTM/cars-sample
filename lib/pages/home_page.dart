@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:cars_sample/utils/nav.dart';
 import 'package:cars_sample/widgets/favoritos_page.dart';
 import 'package:cars_sample/utils/prefs.dart';
 import 'package:cars_sample/domain/carro.dart';
 import 'package:cars_sample/widgets/carros_page.dart';
+import 'package:cars_sample/pages/carro_form_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -55,6 +57,12 @@ class _HomePageState extends State<HomePage>
           CarrosPage(tipo: TipoCarro.luxo),
           FavoritosPage(),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          push(context, CarroFormPage());
+        },
       ),
     );
   }
