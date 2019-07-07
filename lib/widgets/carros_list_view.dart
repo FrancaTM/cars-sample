@@ -26,7 +26,9 @@ class CarrosListView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Center(child: Image.network(c.urlFoto)),
+                    Center(
+                        child: Image.network(c.urlFoto ??
+                            'http://www.livroandroid.com.br/livro/carros/esportivos/Audi_Spyder.png')),
                     Text(
                       c.nome,
                       maxLines: 1,

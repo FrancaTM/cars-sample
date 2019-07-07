@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:cars_sample/domain/carro.dart';
+import 'package:cars_sample/domain/services/carro_service.dart';
+import 'package:cars_sample/utils/alerts.dart';
 
 class CarroFormPage extends StatefulWidget {
   final Carro carro;
@@ -105,7 +107,7 @@ class _CarroFormPageState extends State<CarroFormPage> {
   }
 
   _buildHeaderFoto() {
-    return carro != null
+    return carro != null && carro.urlFoto != null
         ? Image.network(carro.urlFoto)
         : Image.asset('assets/images/camera.png', height: 150);
   }
@@ -158,7 +160,7 @@ class _CarroFormPageState extends State<CarroFormPage> {
     return null;
   }
 
-  _onPressedSalvar(BuildContext context) {
+  _onPressedSalvar(BuildContext context) async {
     if (!_formKey.currentState.validate()) {
       return;
     }
@@ -173,6 +175,18 @@ class _CarroFormPageState extends State<CarroFormPage> {
       _showProgress = true;
     });
     print('salvar o carro $c');
+
+    final response = await CarroService.salvar(c);
+
+    if (response.isOk()) {
+      alert(context, 'Carro salvo', response.message);
+    } else {
+      alert(context, 'Erro', response.message);
+    }
+
+    setState(() {
+      _showProgress = false;
+    });
   }
 
   String _getTipo() {

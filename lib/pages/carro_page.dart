@@ -60,7 +60,8 @@ class _CarroPageState extends State<CarroPage> {
     return ListView(
       padding: EdgeInsets.all(16.0),
       children: <Widget>[
-        Image.network(carro.urlFoto),
+        Image.network(carro.urlFoto ??
+            'http://www.livroandroid.com.br/livro/carros/esportivos/Audi_Spyder.png'),
         _buildMiddleRow(),
         _buildBottomText(),
       ],

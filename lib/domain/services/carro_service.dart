@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:cars_sample/domain/carro.dart';
+import 'package:cars_sample/domain/response.dart';
 
 class CarroService {
   static Future<List<Carro>> getCarros(String tipo) async {
@@ -30,5 +31,22 @@ class CarroService {
     body = body.replaceAll('</p>', '');
 
     return body;
+  }
+
+  static Future<Response> salvar(c) async {
+    final url = 'http://livrowebservices.com.br/rest/carros';
+    print('> post: $url');
+
+    final headers = {'Content-Type': 'application/json'};
+    final body = json.encode(c.toMap());
+    print('   > $body');
+
+    final response = await http.post(url, headers: headers, body: body);
+
+    final s = response.body;
+    print('   < $s');
+
+    final r = Response.fromJson(json.decode(s));
+    return r;
   }
 }
